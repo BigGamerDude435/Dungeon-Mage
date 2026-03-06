@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Dungeon Mage</title>
+<link rel="stylesheet" href="style.css" />
+<script src="app.js" type="module"></script>
+
+<div class="container">
+  <header class="panel header-flex">
+    <div>
+      <div>Name: <strong id="playerName">—</strong></div>
+      <div>Class: <strong>Mage</strong></div>
+    </div>
+    <div class="header-center">
+      <div>XP: <strong id="xpText">0/0</strong></div>
+    </div>
+    <div>
+      <div>HP: <strong id="hpText">0/0</strong></div>
+      <div>Damage: <strong id="damageText">0</strong></div>
+    </div>
+  </header>
+
+  <main id="gameArea" class="panel">
+    <section id="intro" class="intro-center">
+      <h2>Enter your name</h2>
+      <input id="nameInput" class="name-input" placeholder="Your name" />
+      <div class="margin-top-8"><button id="startBtn" class="skill-btn">Start Adventure</button></div>
+    </section>
+
+    <section id="battleScreen" class="hidden">
+      <div class="arena">
+        <div class="panel" style="flex:1">
+          <div class="battle-flex">
+            <div class="avatar" id="playerAvatar">M</div>
+            <div style="flex:1">
+              <div id="playerTitle">Mage</div>
+              <div class="hpbar">
+                <div id="playerHpFill" class="hpfill"></div>
+              </div>
+              <div id="playerHpText" class="hp-text"></div>
+            </div>
+          </div>
+          <div class="log" id="battleLog"></div>
+        </div>
+
+        <div class="panel" style="flex:1">
+          <div class="battle-flex">
+            <div class="avatar" id="enemyAvatar">?</div>
+            <div style="flex:1">
+              <div id="enemyTitle">Enemy</div>
+              <div class="hpbar">
+                <div id="enemyHpFill" class="hpfill"></div>
+              </div>
+              <div id="enemyHpText" class="hp-text"></div>
+            </div>
+          </div>
+          <div class="log" id="enemyLog"></div>
+        </div>
+      </div>
+
+      <div class="margin-top-12">
+        <div class="controls" id="skillsRow"></div>
+        <div class="controls-flex">
+          <button id="bagBtn" class="skill-btn">Character Sheet (<span id="potionsCount">0</span>)</button>
+          <button id="endTurnBtn" class="skill-btn">End Turn</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="roomScreen" class="hidden panel room-center">
+      <h3>Choose a room</h3>
+      <div id="roomChoices" class="room-choices"></div>
+    </section>
+
+    <section id="gameOver" class="hidden panel game-over-center">
+      <h2>You have fallen</h2>
+      <div>Rooms cleared: <strong id="finalRooms">0</strong></div>
+      <div class="margin-top-8"><button id="restartBtn" class="skill-btn">Restart</button></div>
+    </section>
+  </main>
+
+  <footer class="panel footer-flex">
+    <div class="footer-muted">Rest rooms restore spells. Choose a room and defeat the enemy inside
+      to receive a reward.</div>
+    <div><button id="saveBtn" class="skill-btn">Save</button></div>
+  </footer>
+</div>
+
+<div id="modal" class="hidden" aria-hidden="true">
+  <div id="modalBackdrop">
+    <div id="modalBox">
+      <div class="row">
+        <div class="modal-title">Character Sheet</div>
+        <div id="bagContents" class="bag-contents">Potions: 0</div>
+        <div class="modal-buttons">
+          <button id="usePotionBtn" class="skill-btn">Use Potion</button>
+          <button id="closeModal" class="skill-btn">Close</button>
+        </div>
+      </div>
+      <div id="characterSheet" class="hidden">
+        <!-- Future character details could go here -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</html>

@@ -1,0 +1,331 @@
+:root {
+    --bg: #071029;
+    --accent: #7c3aed;
+    --muted: #94a3b8;
+    --good: #10b981;
+    --danger: #ef4444
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    font-family: system-ui, Arial;
+    background: linear-gradient(180deg, #071029, #071a2a);
+    color: #e6eef8
+}
+
+.container {
+    max-width: 900px;
+    margin: 12px auto;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px
+}
+
+.panel {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 10px;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.03)
+}
+
+.arena {
+    display: flex;
+    gap: 12px
+}
+
+.avatar {
+    width: 72px;
+    height: 72px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat
+}
+
+.hpbar {
+    height: 12px;
+    background: rgba(255, 255, 255, 0.04);
+    border-radius: 6px;
+    overflow: hidden
+}
+
+.hpfill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--good), #60a5fa);
+    width: 100%
+}
+
+.controls {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center
+}
+
+.skill-btn {
+    min-width: 120px;
+    padding: 10px 16px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    font-size: 14px
+}
+
+.skill-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-1px)
+}
+
+.skill-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed
+}
+
+.room {
+    padding: 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.2s ease;
+    min-width: 140px
+}
+
+.room:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3)
+}
+
+.room-desc {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 4px
+}
+
+.hidden {
+    display: none
+}
+
+.log {
+    height: 160px;
+    overflow: auto;
+    background: rgba(0, 0, 0, 0.12);
+    padding: 8px;
+    border-radius: 6px;
+    color: var(--muted)
+}
+
+#modal {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50
+}
+
+#modal.hidden {
+    display: none;
+    pointer-events: none;
+    opacity: 0
+}
+
+#modalBackdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center
+}
+
+#modalBox {
+    background: #071428;
+    padding: 12px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 360px
+}
+
+#characterSheet {
+    display: flex;
+    gap: 12px;
+    align-items: center
+}
+
+#characterSheet.avatar {
+    width: 100px;
+    height: 100px
+}
+
+#characterSheet.stats {
+    font-size: 14px;
+    color: var(--accent)
+}
+
+#characterSheet.stats div {
+    margin-bottom: 4px
+}
+
+@media(max-width:700px) {
+    .arena {
+        flex-direction: column
+    }
+
+    .skill-btn {
+        min-width: 140px;
+        flex: 1;
+        max-width: calc(50% - 4px)
+    }
+
+    .controls {
+        gap: 6px
+    }
+
+    .room-choices {
+        gap: 8px
+    }
+
+    .room {
+        min-width: 120px;
+        flex: 1;
+        max-width: calc(50% - 4px)
+    }
+}
+
+/* Header styles */
+.header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-center {
+    text-align: center;
+    flex: 0 0 auto;
+}
+
+/* Intro styles */
+.intro-center {
+    text-align: center;
+}
+
+.name-input {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* Battle screen styles */
+.battle-flex {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.hp-text {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.margin-top-12 {
+    margin-top: 12px;
+}
+
+.controls-flex {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 8px;
+}
+
+/* Room screen styles */
+.room-center {
+    text-align: center;
+}
+
+.room-choices {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Game over styles */
+.game-over-center {
+    text-align: center;
+}
+
+/* Footer styles */
+.footer-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-muted {
+    font-size: 13px;
+    color: var(--muted);
+}
+
+/* Modal styles */
+.modal-title {
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.bag-contents {
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+}
+
+/* JavaScript applied styles */
+.skill-uses {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.character-sheet-container {
+    display: flex;
+    gap: 12px;
+}
+
+.character-avatar {
+    width: 100px;
+    height: 100px;
+}
+
+.character-stats {
+    font-size: 14px;
+    color: var(--accent);
+}
+
+.character-stats div {
+    margin-bottom: 4px;
+}
+
+/* Additional utility classes */
+.margin-top-8 {
+    margin-top: 8px;
+}
