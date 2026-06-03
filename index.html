@@ -2,7 +2,7 @@
 <html lang="en">
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Dungeon Mage</title>
+<title>Dungeon Mage - Roguelike Crawler</title>
 <link rel="stylesheet" href="style.css" />
 <script src="app.js" type="module"></script>
 
@@ -10,31 +10,62 @@
   <header class="panel header-flex">
     <div>
       <div>Name: <strong id="playerName">—</strong></div>
-      <div>Class: <strong>Mage</strong></div>
+      <div>Class: <strong id="playerClass">—</strong></div>
+      <div id="levelDisplay" class="hidden">Level: <strong id="playerLevel">1</strong></div>
     </div>
     <div class="header-center">
       <div>XP: <strong id="xpText">0/0</strong></div>
     </div>
     <div>
       <div>HP: <strong id="hpText">0/0</strong></div>
-      <div>Damage: <strong id="damageText">0</strong></div>
+      <div>Physical DMG: <strong id="dmgPhysical">0</strong></div>
+      <div>Magic DMG: <strong id="dmgMagic">0</strong></div>
+      <div>Armor: <strong id="armorText">0</strong></div>
     </div>
   </header>
 
   <main id="gameArea" class="panel">
-    <section id="intro" class="intro-center">
-      <h2>Enter your name</h2>
-      <input id="nameInput" class="name-input" placeholder="Your name" />
-      <div class="margin-top-8"><button id="startBtn" class="skill-btn">Start Adventure</button></div>
+    <!-- CHARACTER CREATION SCREEN -->
+    <section id="characterCreation" class="screen-section">
+      <h2>Create Your Character</h2>
+      
+      <div class="creation-step">
+        <h3>Step 1: Choose Your Name</h3>
+        <input id="nameInput" class="name-input" placeholder="Enter your character name" maxlength="20" />
+      </div>
+
+      <div class="creation-step">
+        <h3>Step 2: Choose Your Starting Class</h3>
+        <div class="class-selection" id="classSelection"></div>
+      </div>
+
+      <div class="creation-step">
+        <div class="margin-top-12">
+          <button id="startBtn" class="skill-btn btn-large">Begin Adventure</button>
+        </div>
+      </div>
     </section>
 
+    <!-- PRESTIGE CLASS SELECTION -->
+    <section id="prestigeSelection" class="hidden screen-section">
+      <h2>Choose Your Prestige Class</h2>
+      <p class="muted-text">Congratulations! You've reached level 5. Choose your path.</p>
+      
+      <div class="prestige-options" id="prestigeOptions"></div>
+
+      <div class="margin-top-12">
+        <button id="skipPrestigeBtn" class="skill-btn">Continue as is</button>
+      </div>
+    </section>
+
+    <!-- BATTLE SCREEN -->
     <section id="battleScreen" class="hidden">
       <div class="arena">
-        <div class="panel" style="flex:1">
+        <div class="panel battle-panel" style="flex:1">
           <div class="battle-flex">
             <div class="avatar" id="playerAvatar">M</div>
             <div style="flex:1">
-              <div id="playerTitle">Mage</div>
+              <div id="playerTitle">Player</div>
               <div class="hpbar">
                 <div id="playerHpFill" class="hpfill"></div>
               </div>
@@ -44,7 +75,7 @@
           <div class="log" id="battleLog"></div>
         </div>
 
-        <div class="panel" style="flex:1">
+        <div class="panel battle-panel" style="flex:1">
           <div class="battle-flex">
             <div class="avatar" id="enemyAvatar">?</div>
             <div style="flex:1">
@@ -68,42 +99,43 @@
       </div>
     </section>
 
+    <!-- ROOM SELECTION SCREEN -->
     <section id="roomScreen" class="hidden panel room-center">
-      <h3>Choose a room</h3>
+      <h3>Choose a Room</h3>
+      <div class="room-tree" id="roomTree"></div>
       <div id="roomChoices" class="room-choices"></div>
     </section>
 
+    <!-- GAME OVER SCREEN -->
     <section id="gameOver" class="hidden panel game-over-center">
       <h2>You have fallen</h2>
+      <div>Final Class: <strong id="finalClass">—</strong></div>
+      <div>Final Level: <strong id="finalLevel">1</strong></div>
       <div>Rooms cleared: <strong id="finalRooms">0</strong></div>
       <div class="margin-top-8"><button id="restartBtn" class="skill-btn">Restart</button></div>
     </section>
   </main>
 
   <footer class="panel footer-flex">
-    <div class="footer-muted">Rest rooms restore spells. Choose a room and defeat the enemy inside
-      to receive a reward.</div>
-    <div><button id="saveBtn" class="skill-btn">Save</button></div>
+    <div class="footer-muted">Clear rooms and defeat enemies to gain experience and rewards.</div>
+    <div><button id="saveBtn" class="skill-btn">Save Game</button></div>
+    <div><button id="loadBtn" class="skill-btn">Load Game</button></div>
   </footer>
 </div>
 
+<!-- MODAL FOR CHARACTER SHEET AND DIALOGS -->
 <div id="modal" class="hidden" aria-hidden="true">
   <div id="modalBackdrop">
     <div id="modalBox">
-      <div class="row">
-        <div class="modal-title">Character Sheet</div>
-        <div id="bagContents" class="bag-contents">Potions: 0</div>
-        <div class="modal-buttons">
-          <button id="usePotionBtn" class="skill-btn">Use Potion</button>
-          <button id="closeModal" class="skill-btn">Close</button>
-        </div>
+      <div class="modal-title">Character Sheet</div>
+      <div id="characterSheet" class="character-sheet">
+        <div class="sheet-avatar" id="sheetAvatar">👤</div>
+        <div class="sheet-stats" id="sheetStats"></div>
       </div>
-      <div id="characterSheet" class="hidden">
-        <!-- Future character details could go here -->
+      <div class="modal-buttons">
+        <button id="usePotionBtn" class="skill-btn">Use Potion</button>
+        <button id="closeModal" class="skill-btn">Close</button>
       </div>
     </div>
   </div>
 </div>
-
-
-</html>
